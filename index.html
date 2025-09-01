@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suika Game - Fruit Merge Puzzle</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="game-container">
+    <div class="left-panel">
+      <div class="game-header">
+        <h1>Salo Suika</h1>
+      </div>
+      <div class="score-container">
+        <button id="restartBtn" class="restart-button"><span id="newGameText">New Game</span></button>
+        <button id="hammerBtn" class="hammer-button">🔨</button>
+        <button id="settingsBtn" class="hammer-button">⚙️</button>
+        <div class="score"><span id="scoreText">Score: </span><span id="score">0</span></div>
+        <div class="high-score"><span id="bestText">Best: </span><span id="highScore">0</span></div>
+      </div>
+    </div>
+
+    <div class="game-area">
+      <div class="drop-zone">
+        <div class="drop-line"></div>
+        <div class="preview-fruit" id="previewFruit"></div>
+      </div>
+      <canvas id="gameCanvas" width="400" height="600"></canvas>
+    </div>
+
+    <div class="right-panel">
+      <div class="fruit-guide">
+        <div class="fruit-chain" id="fruitChain">
+          <div class="preview-fruit" fruit="cherry"></div>
+          <div class="preview-fruit" fruit="strawberry"></div>
+          <div class="preview-fruit" fruit="grape"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div id="gameOverModal" class="modal">
+    <div class="modal-content">
+      <h2 id="gameOverText">Game Over!</h2>
+      <p><span id="finalScoreText">Final Score: </span><span id="finalScore">0</span></p>
+      <p id="newRecord" class="new-record"><span id="newRecordText">🎉 New High Score! 🎉</span></p>
+      <button id="playAgainBtn" class="play-again-button"><span id="playAgainText">Play Again</span></button>
+    </div>
+  </div>
+
+  <div id="settingsModal" class="modal">
+    <div class="modal-content">
+      <div class="tabs-wrap">
+        <ul>
+          <li class="active" id="settingsTab"><span id="settingsText">Settings</span></li>
+          <li id="achievementsTab"><span id="achievementsText">Achievements</span></li>
+        </ul>
+      </div>
+      <div id="settingsContainer">
+        <label class="toggle">
+          <input class="toggle-checkbox" id="backgroundMusicSwitch" type="checkbox">
+          <div class="toggle-switch"></div>
+          <span class="toggle-label" id="musicText">Music</span>
+        </label>
+        <label class="toggle">
+          <input class="toggle-checkbox" id="soundEffectsSwitch" type="checkbox">
+          <div class="toggle-switch"></div>
+          <span class="toggle-label" id="soundEffectsText">Sound effects</span>
+        </label>
+        <label class="toggle">
+          <span class="toggle-label" id="languageText">Language</span>
+          <select name="languages" id="langaugeSelect">
+            <option value="EN">English</option>
+            <option value="ES">Spanish</option>
+          </select> </label>
+      </div>
+      <div id="achievementsContainer" class="d-none">
+      </div>
+      <button id="closeSettingsModalBtn" class="play-again-button"><span id="closeText">close</span></button>
+    </div>
+  </div>
+
+  <div id="snackbar"></div>
+
+  <script src="main.js"></script>
+  <script src="settings.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,781 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+  color: #333;
+}
+
+.game-container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+.left-panel {
+  width: 200px;
+  min-width: 150px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  overflow-y: auto;
+}
+
+.game-area {
+  flex: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  min-width: 0;
+}
+
+.right-panel {
+  width: 200px;
+  min-width: 150px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  color: white;
+  overflow-y: auto;
+}
+
+.game-header {
+  text-align: center;
+}
+
+.game-header h1 {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.score-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.score, .high-score {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 12px;
+  border-radius: 15px;
+  text-align: center;
+  font-weight: bold;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  backdrop-filter: blur(5px);
+}
+
+.drop-zone {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 60px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.drop-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ff6b9d, transparent);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+.preview-fruit {
+  position: absolute;
+  bottom: 10px;
+  left: 50px;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  transition: all 0.3s ease;
+  pointer-events: all;
+  cursor: grab;
+  background-size: cover;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.preview-fruit.inherit {
+  position: inherit;
+}
+
+.preview-fruit[fruit="cherry"] {
+  background-image: url(assets/cherry.png);
+}
+
+.preview-fruit[fruit="strawberry"] {
+  background-image: url(assets/strawberry.png);
+}
+
+.preview-fruit[fruit="grape"] {
+  background-image: url(assets/grape.png);
+}
+
+.preview-fruit[fruit="orange"] {
+  background-image: url(assets/orange.png);
+}
+
+.preview-fruit[fruit="apple"] {
+  background-image: url(assets/apple.png);
+}
+
+.preview-fruit[fruit="pear"] {
+  background-image: url(assets/pear.png);
+}
+
+.preview-fruit[fruit="peach"] {
+  background-image: url(assets/peach.png);
+}
+
+.preview-fruit[fruit="pinnapple"] {
+  background-image: url(assets/pinnapple.png);
+}
+
+.preview-fruit[fruit="melon"] {
+  background-image: url(assets/melon.png);
+}
+
+.preview-fruit[fruit="watermelon"] {
+  background-image: url(assets/watermelon.png);
+}
+
+.preview-fruit[fruit="kiwi"] {
+  background-image: url(assets/kiwi.png);
+}
+
+.preview-fruit[fruit="lemon"] {
+  background-image: url(assets/lemon.png);
+}
+
+.preview-fruit[fruit="avocado"] {
+  background-image: url(assets/avocado.png);
+}
+
+.preview-fruit:active {
+  cursor: grabbing;
+  transform: scale(0.9);
+}
+
+#gameCanvas {
+  border: none;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #f8f9fa 0%, #e8f4f8 50%, #ddeef5 100%);
+  position: relative;
+  cursor: crosshair;
+  max-width: 100%;
+  max-height: calc(100vh - 80px);
+  
+  /* 3D Box Effect */
+  box-shadow: 
+      /* Inner shadow for depth */
+      inset 0 0 0 4px #4a90e2,
+      inset 8px 0 12px -8px rgba(0, 0, 0, 0.3),
+      inset -8px 0 12px -8px rgba(0, 0, 0, 0.3),
+      inset 0 8px 12px -8px rgba(0, 0, 0, 0.2),
+      inset 0 -8px 20px -8px rgba(0, 0, 0, 0.4),
+      /* Outer shadow for elevation */
+      0 20px 40px rgba(0, 0, 0, 0.15),
+      0 8px 16px rgba(0, 0, 0, 0.1);
+  
+  /* Add subtle perspective transform */
+  transform: perspective(1000px) rotateX(2deg);
+  transform-origin: center bottom;
+}
+
+#gameCanvas::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  background: linear-gradient(135deg, 
+      rgba(74, 144, 226, 0.8) 0%, 
+      rgba(74, 144, 226, 0.6) 25%,
+      rgba(74, 144, 226, 0.4) 50%,
+      rgba(74, 144, 226, 0.6) 75%,
+      rgba(74, 144, 226, 0.8) 100%);
+  border-radius: 24px;
+  z-index: -1;
+  filter: blur(1px);
+}
+
+#gameCanvas::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 30%,
+      transparent 70%,
+      rgba(0, 0, 0, 0.05) 100%);
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.game-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.next-fruit {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 12px;
+  border-radius: 15px;
+  text-align: center;
+  font-weight: bold;
+  backdrop-filter: blur(5px);
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+}
+
+.next-fruit span {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  display: block;
+  margin-top: 5px;
+}
+
+.drop-button, .restart-button, .play-again-button {
+  background: linear-gradient(45deg, #cc44d0, #36ace6);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 20px;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.hammer-button {
+background: linear-gradient(45deg, #cc44d0, #36ace6);
+color: white;
+border: none;
+padding: 12px 20px;
+border-radius: 20px;
+font-size: clamp(0.9rem, 2vw, 1.1rem);
+font-weight: bold;
+cursor: pointer;
+transition: all 0.3s ease;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.hammer-button.active {
+background: linear-gradient(45deg, #ff4444, #ff8800);
+box-shadow: 0 0 20px rgba(255, 68, 68, 0.5);
+animation: pulse-hammer 1s infinite;
+}
+
+@keyframes pulse-hammer {
+0%, 100% { transform: scale(1); }
+50% { transform: scale(1.05); }
+}
+
+.drop-button:hover, .restart-button:hover, .play-again-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.hammer-button:hover {
+transform: translateY(-2px);
+box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.drop-button:active, .restart-button:active, .play-again-button:active {
+  transform: translateY(0);
+}
+
+.hammer-button:active {
+transform: translateY(0);
+}
+
+.hammer-button.disabled {
+background: linear-gradient(45deg, #666, #888);
+cursor: not-allowed;
+opacity: 0.6;
+}
+
+.hammer-button.disabled:hover {
+transform: none;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+#gameCanvas.hammer-mode {
+cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text y="24" font-size="24">🔨</text></svg>') 16 16, auto !important;
+}
+
+.fruit-guide {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 15px;
+  border-radius: 15px;
+  text-align: center;
+  backdrop-filter: blur(5px);
+}
+
+.fruit-guide h3 {
+  margin-bottom: 10px;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+}
+
+.fruit-chain {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+}
+
+.fruit-evolution-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.fruit-chain span {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  margin: 10vh auto;
+  padding: 30px;
+  border-radius: 20px;
+  width: min(90vw, 400px);
+  max-height: 80vh;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+}
+
+.modal-content h2 {
+  margin-bottom: 20px;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
+.modal-content p {
+  margin-bottom: 15px;
+  font-size: clamp(1rem, 3vw, 1.2rem);
+}
+
+.new-record {
+  color: #ffd700;
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
+
+.play-again-button {
+  margin-top: 20px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .game-container {
+      flex-direction: column;
+  }
+  
+  .left-panel, .right-panel {
+      width: 100%;
+      height: auto;
+      min-height: 60px;
+      padding: 10px;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      overflow-x: auto;
+      overflow-y: hidden;
+  }
+  
+  .left-panel {
+      order: 1;
+  }
+  
+  .game-area {
+      order: 2;
+      flex: 1;
+      min-height: 0;
+  }
+  
+  .right-panel {
+      order: 3;
+  }
+  
+  .score-container {
+      flex-direction: row;
+      gap: 10px;
+  }
+  
+  .game-controls {
+      flex-direction: row;
+      gap: 10px;
+  }
+  
+  .fruit-guide {
+      min-width: 200px;
+  }
+  
+  .fruit-chain {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 3px;
+  }
+  
+  .fruit-evolution-row {
+      gap: 2px;
+  }
+  
+  #gameCanvas {
+      max-height: calc(100vh - 140px);
+  }
+}
+
+@media (max-width: 480px) {
+  .left-panel, .right-panel {
+      padding: 8px;
+      gap: 8px;
+  }
+  
+  .game-header h1 {
+      font-size: 1.2rem;
+  }
+  
+  .score, .high-score {
+      padding: 6px 10px;
+      font-size: 0.9rem;
+  }
+  
+  .next-fruit {
+      padding: 8px;
+      font-size: 0.8rem;
+  }
+  
+  .drop-button, .restart-button {
+      padding: 8px 12px;
+      font-size: 0.9rem;
+  }
+  
+  .fruit-guide {
+      padding: 10px;
+      min-width: 150px;
+  }
+  
+  .fruit-guide h3 {
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+  }
+  
+  .fruit-chain {
+      font-size: 1rem;
+  }
+}
+
+/* Particle effects */
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: linear-gradient(45deg, #ff6b9d, #4ecdc4);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: particle-float 1s ease-out forwards;
+}
+
+.destruction-particle {
+position: absolute;
+width: 8px;
+height: 8px;
+border-radius: 50%;
+pointer-events: none;
+animation: destruction-float 1.5s ease-out forwards;
+}
+
+@keyframes particle-float {
+  0% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+  }
+  100% {
+      opacity: 0;
+      transform: translateY(-100px) scale(0);
+  }
+}
+@keyframes destruction-float {
+0% {
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+}
+100% {
+  opacity: 0;
+  transform: translate(var(--vx), var(--vy)) scale(0);
+}
+}
+
+/**Settings modal**/
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  font-weight: bold;;
+}
+
+.d-none {
+  display: none !important;
+}
+
+
+/**Checkbox**/
+
+.toggle {
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 24px;
+}
+
+.toggle-switch {
+  display: inline-block;
+  background: #ccc;
+  border-radius: 16px;
+  width: 87px;
+  height: 48px;
+  position: relative;
+  vertical-align: middle;
+  transition: background 0.25s;
+}
+.toggle-switch:before, .toggle-switch:after {
+  content: "";
+}
+.toggle-switch:before {
+  display: block;
+  background: linear-gradient(to bottom, #fff 0%, #eee 100%);
+  background-image: url(assets/cherry.png);
+  background-size: cover;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+  width: 36px;
+  height: 36px;
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  transition: left 0.25s;
+}
+.toggle:hover .toggle-switch:before {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5);
+}
+.toggle-checkbox:checked + .toggle-switch {
+  background: #56c080;
+}
+.toggle-checkbox:checked + .toggle-switch:before {
+  left: 45px;
+}
+
+.toggle-checkbox {
+  position: absolute;
+  visibility: hidden;
+}
+
+.toggle-label {
+  margin-left: 5px;
+  position: relative;
+  top: 2px;
+}
+
+/** SETTINGS MODAL **/
+
+#settingsContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.tabs-wrap{
+	padding: 20px 0;
+}
+
+.tabs-wrap ul{
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+}
+
+.tabs-wrap ul li{
+	width: 135px;
+    text-align: center;
+    background: #e9ecf1;
+    border-right: 1px solid #c1c4c9;
+    padding: 13px 15px;
+  list-style-type: none;
+  background: rgba(255, 255, 255, 0.2);
+	cursor: pointer;
+	-webkit-transition: all 0.2s ease;
+	-o-transition: all 0.2s ease;
+	transition: all 0.2s ease;
+}
+
+.tabs-wrap ul li:first-child{
+	border-top-left-radius: 25px;
+	border-bottom-left-radius: 25px;
+}
+
+.tabs-wrap ul li:last-child{
+	border-right: 0px;
+	border-top-right-radius: 25px;
+	border-bottom-right-radius: 25px;
+}
+
+.tabs-wrap ul li:hover,
+.tabs-wrap ul li.active{
+	background: linear-gradient(45deg, #cc44d0, #36ace6);
+	color: #fff;
+}
+
+/** ACHIEVEMENTS **/
+
+#achievementsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  overflow-y: auto;
+}
+
+.achievement-item {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  padding: 24px 12px;
+  border: solid 1px white;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  align-items: center;
+  opacity: 0.6;
+}
+
+.achievement-item.unlocked {
+  opacity: 1;
+}
+.achievement-item img {
+  height: 64px;
+  width: 64px;
+}
+
+.achievement-item .achievement-img {
+  display: none;
+}
+
+.achievement-item.unlocked .achievement-img {
+  display: block;
+}
+.achievement-item.unlocked .locked-img {
+  display: none;
+}
+
+/** SNACKBAR **/
+
+#snackbar {
+  visibility: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-width: 250px;
+  margin-left: -125px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 8px 8px 3px rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+#snackbar img {
+  height: 52px;
+  border: solid 2px white;
+  padding: 4px;
+  border-radius: 8px;
+
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;} 
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;} 
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
