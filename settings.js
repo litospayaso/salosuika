@@ -4,7 +4,7 @@ const notificationArray = [];
 const achievementsList = [
   {
     id: 1,
-    img: 'cherry',
+    img: 'trophy_1',
     min: 1,
     description: {
       EN: 'get 5000 points',
@@ -13,7 +13,7 @@ const achievementsList = [
   },
   {
     id: 2,
-    img: 'strawberry',
+    img: 'trophy_2',
     min: 1,
     description: {
       EN: 'get 10000 points',
@@ -22,7 +22,7 @@ const achievementsList = [
   },
   {
     id: 3,
-    img: 'grape',
+    img: 'trophy_3',
     min: 1,
     description: {
       EN: 'get 50000 points',
@@ -31,7 +31,7 @@ const achievementsList = [
   },
   {
     id: 4,
-    img: 'orange',
+    img: 'trophy_4',
     min: 1,
     description: {
       EN: 'get 75000 points',
@@ -134,7 +134,7 @@ const achievementsList = [
   },
   {
     id: 15,
-    img: 'cherry',
+    img: 'cherry_angry',
     replace: 'cherry',
     min: 1,
     description: {
@@ -144,7 +144,7 @@ const achievementsList = [
   },
   {
     id: 16,
-    img: 'orange',
+    img: 'orange_angry',
     replace: 'orange',
     min: 3,
     description: {
@@ -154,7 +154,7 @@ const achievementsList = [
   },
   {
     id: 17,
-    img: 'peach',
+    img: 'peach_angry',
     replace: 'peach',
     min: 6,
     description: {
@@ -164,7 +164,7 @@ const achievementsList = [
   },
   {
     id: 18,
-    img: 'pinnapple',
+    img: 'pinnapple_angry',
     replace: 'used',
     min: 7,
     description: {
@@ -174,7 +174,7 @@ const achievementsList = [
   },
   {
     id: 19,
-    img: 'melon',
+    img: 'melon_angry',
     replace: 'melon',
     min: 8,
     description: {
@@ -184,7 +184,7 @@ const achievementsList = [
   },
   {
     id: 20,
-    img: 'lemon',
+    img: 'lemon_angry',
     replace: 'lemon',
     min: 11,
     description: {
@@ -194,7 +194,7 @@ const achievementsList = [
   },
   {
     id: 21,
-    img: 'hammer',
+    img: 'hammer_1',
     min: 1,
     description: {
       EN: 'Get 5 hammers',
@@ -203,7 +203,7 @@ const achievementsList = [
   },
   {
     id: 22,
-    img: 'hammer',
+    img: 'hammer_2',
     min: 1,
     description: {
       EN: 'Get 15 hammers',
@@ -212,7 +212,7 @@ const achievementsList = [
   },
   {
     id: 23,
-    img: 'hammer',
+    img: 'hammer_3',
     min: 1,
     description: {
       EN: 'Get 20 hammers',
@@ -221,7 +221,7 @@ const achievementsList = [
   },
   {
     id: 24,
-    img: 'hammer',
+    img: 'hammer_4',
     min: 1,
     description: {
       EN: 'Get 25 hammers',
@@ -230,7 +230,7 @@ const achievementsList = [
   },
   {
     id: 25,
-    img: 'hammer',
+    img: 'trophy_5',
     min: 1,
     description: {
       EN: 'Get all achievements',

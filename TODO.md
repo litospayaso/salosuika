@@ -10,6 +10,8 @@ Project Description
 ### In Progress
 
 - [ ] añadir logros (imagenes)  
+- [ ] Cambiar los iconos de settings y martillo para que sean más visibles  
+- [ ] alinear flexboxes del title para estar todas en la misma línea  
 
 ### Done ✓
 
