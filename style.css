@@ -72,7 +72,10 @@ body {
 }
 
 .score, .high-score {
+  display: flex;
   background: rgba(255, 255, 255, 0.2);
+  align-items: center;
+  justify-content: center;
   padding: 8px 12px;
   border-radius: 15px;
   text-align: center;
@@ -266,7 +269,7 @@ body {
 }
 
 .drop-button, .restart-button, .play-again-button {
-  background: linear-gradient(45deg, #cc44d0, #36ace6);
+background: linear-gradient(45deg, #8f0f93, #218bbf);
   color: white;
   border: none;
   padding: 12px 20px;
@@ -279,7 +282,7 @@ body {
 }
 
 .hammer-button {
-background: linear-gradient(45deg, #cc44d0, #36ace6);
+background: linear-gradient(45deg, #8f0f93, #218bbf);
 color: white;
 border: none;
 padding: 12px 20px;
@@ -677,8 +680,15 @@ animation: destruction-float 1.5s ease-out forwards;
 
 .tabs-wrap ul li:hover,
 .tabs-wrap ul li.active{
-	background: linear-gradient(45deg, #cc44d0, #36ace6);
+  background: linear-gradient(45deg, #8f0f93, #218bbf);
 	color: #fff;
+}
+
+select {
+  margin-left: 8px;
+  padding: 9px;
+  text-align: left;
+  font-size: 19px;
 }
 
 /** ACHIEVEMENTS **/

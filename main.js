@@ -34,22 +34,6 @@ class SuikaGame {
     this.allowDrop = true;
     this.hammerMode = false;
     this.hammerUses = 3 + Math.floor(this.gamesPlayed / 2);
-    
-    if (this.hammerUses >= 5 && !this.achievements.includes(21)) {
-      this.addNewAchievement(21);
-    }
-
-    if (this.hammerUses >= 15 && !this.achievements.includes(22)) {
-      this.addNewAchievement(22);
-    }
-
-    if (this.hammerUses >= 20 && !this.achievements.includes(23)) {
-      this.addNewAchievement(23);
-    }
-
-    if (this.hammerUses >= 25 && !this.achievements.includes(24)) {
-      this.addNewAchievement(24);
-    }
 
     // Fruit types and properties
     this.fruitTypes = fruitTypes;
@@ -72,6 +56,27 @@ class SuikaGame {
     };
 
     this.achievements = localStorage.getItem('achievements') ? JSON.parse(localStorage.getItem('achievements')) : [];
+
+
+    if(this.achievements.length >= 24 && !this.achievements.includes(25)) {
+      this.addNewAchievement(25);
+    }
+        
+    if (this.hammerUses >= 5 && !this.achievements.includes(21)) {
+      this.addNewAchievement(21);
+    }
+
+    if (this.hammerUses >= 15 && !this.achievements.includes(22)) {
+      this.addNewAchievement(22);
+    }
+
+    if (this.hammerUses >= 20 && !this.achievements.includes(23)) {
+      this.addNewAchievement(23);
+    }
+
+    if (this.hammerUses >= 25 && !this.achievements.includes(24)) {
+      this.addNewAchievement(24);
+    }
 
     this.init();
   }
@@ -168,6 +173,13 @@ class SuikaGame {
     this.gameLoop();
     // Try to play background music
     this.setupAudio();
+
+    // for (let i = 1; i<25; i++) {
+    //   setTimeout(() => {
+    //     if(this.addNewAchievement)
+    //     this.addNewAchievement(i);
+    //   }, 1100*i)
+    // }
   }
 
   setupAudio() {
@@ -847,8 +859,8 @@ class SuikaGame {
     localStorage.setItem('achievements', JSON.stringify(this.achievements))
     window.achievementNotification(id);
     window.setAchievementList();
-    if(this.achievements.length >= 29 && !this.achievements.includes(30)) {
-      addNewAchievement(30);
+    if(this.achievements.length >= 24 && !this.achievements.includes(25)) {
+      this.addNewAchievement(25);
     }
   }
 
@@ -906,6 +918,10 @@ class SuikaGame {
 
     if (this.hammerUses >= 25 && !this.achievements.includes(24)) {
       this.addNewAchievement(24);
+    }
+
+    if(this.achievements.length >= 24 && !this.achievements.includes(25)) {
+      this.addNewAchievement(25);
     }
 
     const hammerBtn = document.getElementById('hammerBtn');

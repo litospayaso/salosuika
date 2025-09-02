@@ -328,7 +328,7 @@ const setCurrentValues = () => {
 
   setTimeout(() => {
     updateBackgroundMusic();
-  }, 150);
+  }, 250);
 }
 
 const updateTranslations = () => {

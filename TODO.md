@@ -6,17 +6,18 @@ Project Description
 
 ### Todo
 
+- [ ] poner el sprite de salo cogiendo la fruta  
 
 ### In Progress
 
-- [ ] añadir logros (imagenes)  
-- [ ] Cambiar los iconos de settings y martillo para que sean más visibles  
-- [ ] alinear flexboxes del title para estar todas en la misma línea  
 
 ### Done ✓
 
 - [x] Poner un timeout a la hora de lanzar la fruta  
 - [x] logros en puntuación máxima  
+- [x] añadir logros (imagenes)  
+- [x] Cambiar los iconos de settings y martillo para que sean más visibles  
+- [x] alinear flexboxes del title para estar todas en la misma línea  
 - [x] añadir logros (logica) Añadir los martillazos que faltan para el logro  
 - [x] añadir traducciones (logica)  
 - [x] añadir traducciones (jsons)  
