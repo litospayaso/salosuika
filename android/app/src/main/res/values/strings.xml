@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Gotzon</string>
+    <string name="title_activity_main">Gotzon</string>
+    <string name="package_name">angelitapp.gotzon</string>
+    <string name="custom_url_scheme">angelitapp.gotzon</string>
+</resources>

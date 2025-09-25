@@ -197,7 +197,7 @@ class SuikaGame {
     const backgroundMusicState = localStorage.getItem('backgroundMusic') !== undefined ? localStorage.getItem('backgroundMusic') === 'true' : true;
 
     const backgroundMusic = document.createElement('audio');
-    backgroundMusic.setAttribute('src', 'music/background.mp3');
+    backgroundMusic.setAttribute('src', 'assets/music/background.mp3');
     if (backgroundMusicState) {
       backgroundMusic.setAttribute('autoplay', 'autoplay');
     }
@@ -326,7 +326,6 @@ class SuikaGame {
         this.createDestructionParticles(x, y, fruit.color);
 
         const destroyedFruit = fruitTypes[fruit.type];
-        console.log('%c fruit', 'background: #df03fc; color: #f8fc03', destroyedFruit);
         this.achievementsCounter[destroyedFruit.name] = this.achievementsCounter[destroyedFruit.name] ? this.achievementsCounter[destroyedFruit.name] + 1 : 1;
         this.achievementsCounter.used = this.achievementsCounter.used ? this.achievementsCounter.used + 1 : 1;
         this.updateHammerAchievents();
@@ -582,8 +581,6 @@ class SuikaGame {
     // Create new fruit of next type
     const newType = fruit1.type + 1;
     const newFruitType = this.fruitTypes[newType];
-
-    console.log('%c this.fruitsDiscovered', 'background: #df03fc; color: #f8fc03', this.fruitsDiscovered);
 
     if (newType + 1 > this.fruitsDiscovered) {
       this.fruitsDiscovered = newType + 1;

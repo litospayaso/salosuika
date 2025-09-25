@@ -2,15 +2,28 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Suika Game - Fruit Merge Puzzle</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <title>Salo suika</title>
+  <meta name="viewport"
+    content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="format-detection" content="telephone=" />
+
+  <base href="/" />
+
+  <meta name="color-scheme" content="light" />
+  <meta name="msapplication-tap-highlight" content="no" />
+
+  <link rel="icon" type="image/png" href="assets/icon/favicon.png" />
+  <link rel="manifest" href="https://raw.githubusercontent.com/litospayaso/gotzon/refs/heads/master/manifest.json" />
+
+  <!-- add to homescreen for ios -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 </head>
 
 <body>
   <div class="game-container">
-    <div class="left-panel">
+    <div class="left-panel top-panel">
       <div class="game-header">
         <h1>Salo Suika</h1>
       </div>
@@ -40,7 +53,6 @@
         </div>
       </div>
     </div>
-  </div>
   </div>
 
   <div id="gameOverModal" class="modal">
@@ -75,7 +87,7 @@
           <span class="toggle-label" id="languageText">Language</span>
           <select name="languages" id="langaugeSelect">
             <option value="EN">English</option>
-            <option value="ES">Spanish</option>
+            <option value="ES">Castellano</option>
           </select> </label>
       </div>
       <div id="achievementsContainer" class="d-none">
@@ -85,9 +97,6 @@
   </div>
 
   <div id="snackbar"></div>
-
-  <script src="main.js"></script>
-  <script src="settings.js"></script>
 </body>
 
 </html>
