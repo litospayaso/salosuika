@@ -1,6 +1,6 @@
 {
-  "short_name": "Gotzon",
-  "name": "Gotzon",
+  "short_name": "Salosuika",
+  "name": "Salosuika",
   "icons": [
     {
       "src": "https://raw.githubusercontent.com/litospayaso/gotzon/refs/heads/master/src/assets/icons/icon-512.webp",
@@ -28,7 +28,7 @@
       "type": "image/webp"
     }
   ],
-  "start_url": "https://litospayaso.github.io/gotzon/",
+  "start_url": "https://litospayaso.github.io/salosuika/",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"

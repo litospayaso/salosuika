@@ -1,6 +1,6 @@
 {
-  "appId": "angelitapp.gotzon",
-  "appName": "gotzon",
+  "appId": "angelitapp.salosuika",
+  "appName": "salosuika",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

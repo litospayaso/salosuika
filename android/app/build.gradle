@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace "angelitapp.gotzon"
+    namespace "angelitapp.salosuika"
     compileSdk rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "angelitapp.gotzon"
+        applicationId "angelitapp.salosuika"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 6

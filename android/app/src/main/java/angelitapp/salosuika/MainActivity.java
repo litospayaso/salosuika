@@ -1,4 +1,4 @@
-package angelitapp.gotzon;
+package angelitapp.salosuika;
 
 import com.getcapacitor.BridgeActivity;
 
