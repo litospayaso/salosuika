@@ -1,6 +1,6 @@
 # Salosuika
 
-![Salosuika header image](https://raw.githubusercontent.com/litospayaso/salosuika/refs/heads/master/src/assets/icons/header.png)
+![Salosuika header image](https://raw.githubusercontent.com/litospayaso/salosuika/refs/heads/main/src/assets/icons/header.png)
 
 This is a personal project for creating FOSS suika game for my girlfriend. All images and music have been generated with AI.
 
